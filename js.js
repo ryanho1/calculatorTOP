@@ -12,43 +12,47 @@
     let input1 = Number;
     let input2 = Number;
 
-    let userInput = "89777+6";
-    const userInputObjectForm = userInput.split("+");
+    let userInput = "2+2-1+5";
+    const userInputObjectForm = userInput.split(/[+-/*]/);
+    console.log(userInputObjectForm);
     const filteredNumberStrings = userInputObjectForm.filter(Number);
     const filteredNumberIntegers = filteredNumberStrings.map(Number);
     console.log(filteredNumberIntegers);
 
-  const add = function(input1,input2) {
-    let newValue = input1 + input2;
-    return newValue;
-  };
-
-  const subtract = function(input1,input2) {
-    let newValue = input1 - input2;
+  const subtract = function(filteredNumberIntegers) {
+    if (filteredNumberIntegers.length === 0) return 0;
+    let newValue = filteredNumberIntegers.reduce(function(total, num) {return total - num});
     return newValue;
   };
   
-  const multiply = function(input1,input2) {
-  let newValue = input1 * input2;
-  return newValue;
-  };
-
-  const divide = function(input1,input2) {
-    let newValue = input1 / input2;
+  const multiply = function(filteredNumberIntegers) {
+    let newValue = filteredNumberIntegers.reduce(function(total, num) {return total * num}, 1);
     return newValue;
   };
 
-  //testing with reduce
-  const addingTEST = function(filteredNumberIntegers) {
-    let newValue = filteredNumberIntegers.reduce(function(total, num) {return total + num}, 0);
+  const divide = function(filteredNumberIntegers) {
+    let newValue = filteredNumberIntegers.reduce(function(total, num) {return total / num});
+    return newValue;
+  };
+
+  // do reduce function for all operand functions, then test with /[+-/*]/
+
+  const add = function(filteredNumberIntegers) {
+    let newValue = filteredNumberIntegers.reduce(function(total, num) {return total + num});
     return newValue;
     };
 
 function operate(userInput) {
-  if (userInput.includes("+")){
-   return addingTEST(filteredNumberIntegers);
-  }
-}  
+  if (userInput.includes('/')) {
+    return divide(filteredNumberIntegers)
+  } else if (userInput.includes('*')) {
+    return multiply(filteredNumberIntegers)
+  } else if (userInput.includes("-")) {
+    return subtract(filteredNumberIntegers)
+  } else if (userInput.includes("+")){
+    return add(filteredNumberIntegers);
+   }
+}
 
 console.log(operate(userInput))
 
