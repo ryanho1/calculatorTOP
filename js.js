@@ -11,9 +11,10 @@
 
     let input1 = Number;
     let input2 = Number;
-    let userInput = "8+6";
-    const twoPlusFiveObj = Array.from(userInput);
-    const filteredNumberStrings = twoPlusFiveObj.filter(Number);
+
+    let userInput = "89777+6";
+    const userInputObjectForm = userInput.split("+");
+    const filteredNumberStrings = userInputObjectForm.filter(Number);
     const filteredNumberIntegers = filteredNumberStrings.map(Number);
     console.log(filteredNumberIntegers);
 
