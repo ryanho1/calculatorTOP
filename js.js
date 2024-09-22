@@ -4,28 +4,41 @@
     const keys = document.querySelectorAll('.keys');
     let userInput = "";
     let result = Number;
+    let MathError = Number + "/0";
 
     keys.forEach(button => button.addEventListener('click',() => {
       let buttonContent = button.textContent;
       screen.value += buttonContent;
-      console.log(screen.value);
   }));
+// if arr.length === 1, return "FINISH THE EQUATION!!!"
+//if input is juist an operand, then return "an error too!"
 
       calculate.addEventListener('click', () => {
-      userInput = screen.value;
+      if (screen.value.includes('/0')){
+        screen.value = "Math Error";
+      } else if (screen.value.length <= 2) {
+        screen.value = 'FINISH THE BLOODY EQUATION' 
+      } else {
+        userInput = screen.value;
+      }
+
+    const userInputObjectForm = userInput.split(/[/*-+]/);
+    const filteredNumberStrings = userInputObjectForm.filter(Number);
+    const filteredNumberIntegers = filteredNumberStrings.map(Number);
 
     clear.addEventListener('click', () => {
         screen.value = '';
     })
-//})
-//}
 
-    const userInputObjectForm = userInput.split(/[+-/*]/);
-    console.log(userInputObjectForm)
-    const filteredNumberStrings = userInputObjectForm.filter(Number);
-    const filteredNumberIntegers = filteredNumberStrings.map(Number);
 
-    //operand logic
+    
+    //finding errors just delete this and it will be fine
+      // if (filteredNumberStrings.length <= 3) {
+      //   console.log('c');
+      //   screen.value = 'FINISH THE BLOODY EQUATION' 
+      // } 
+
+    //operator logic
   const subtract = function(filteredNumberIntegers) {
     if (filteredNumberIntegers.length === 0) return 0;
     let newValue = filteredNumberIntegers.reduce(function(total, num) {return total - num});
@@ -38,7 +51,8 @@
   };
 
   const divide = function(filteredNumberIntegers) {
-    let newValue = filteredNumberIntegers.reduce(function(total, num) {return total / num});
+    let newValue = filteredNumberIntegers.reduce(function(total, num) 
+        {return total / num});
     return newValue;
   };
 
@@ -46,20 +60,19 @@
     let newValue = filteredNumberIntegers.reduce(function(total, num) {return total + num}, 0);
     return newValue;
     };
-// something here, perhaps make it += or something like that with screen.value (assign function to var, then += with said var)
 function operate(userInput) {
   if (userInput.includes('/')) {
     result = divide(filteredNumberIntegers);
-    screen.value = result;
+    screen.value = Math.round(result * 100) / 100;
   } else if (userInput.includes('*')) {
     result = multiply(filteredNumberIntegers);
-    screen.value = result;
+    screen.value = Math.round(result * 100) / 100;
   } else if (userInput.includes("-")) {
     result = subtract(filteredNumberIntegers);
-    screen.value = result;
+    screen.value = Math.round(result * 100) / 100;
   } else if (userInput.includes("+")){
     result = add(filteredNumberIntegers);
-    screen.value = result;
+    screen.value = Math.round(result * 100) / 100;
    }
 };
 
