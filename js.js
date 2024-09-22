@@ -5,13 +5,14 @@
     let userInput = "";
     let result = Number;
     let MathError = Number + "/0";
+    
+    calculate.setAttribute("style", "width:90px; height:90px; font-size: 30px; font-weight:800; border-radius: 50px; cursor: pointer;");
+    clear.setAttribute("style", "width:90px; height:90px font-size: 30px; font-weight:800; border-radius: 50px; cursor: pointer;");
 
     keys.forEach(button => button.addEventListener('click',() => {
       let buttonContent = button.textContent;
       screen.value += buttonContent;
   }));
-// if arr.length === 1, return "FINISH THE EQUATION!!!"
-//if input is juist an operand, then return "an error too!"
 
       calculate.addEventListener('click', () => {
       if (screen.value.includes('/0')){
@@ -22,21 +23,13 @@
         userInput = screen.value;
       }
 
-    const userInputObjectForm = userInput.split(/[/*-+]/);
+    const userInputObjectForm = userInput.split(/[/*+-]/);
     const filteredNumberStrings = userInputObjectForm.filter(Number);
     const filteredNumberIntegers = filteredNumberStrings.map(Number);
 
     clear.addEventListener('click', () => {
         screen.value = '';
     })
-
-
-    
-    //finding errors just delete this and it will be fine
-      // if (filteredNumberStrings.length <= 3) {
-      //   console.log('c');
-      //   screen.value = 'FINISH THE BLOODY EQUATION' 
-      // } 
 
     //operator logic
   const subtract = function(filteredNumberIntegers) {
