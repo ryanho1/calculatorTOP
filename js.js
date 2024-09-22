@@ -3,10 +3,12 @@
     const calculate = document.getElementById("calculate");
     const keys = document.querySelectorAll('.keys');
     let userInput = "";
+    let result = Number;
 
     keys.forEach(button => button.addEventListener('click',() => {
       let buttonContent = button.textContent;
       screen.value += buttonContent;
+      console.log(screen.value);
   }));
 
       calculate.addEventListener('click', () => {
@@ -17,15 +19,11 @@
     })
 //})
 //}
-    //create a userInput with input, so add the strings together (7 + 7) then boom
-    //then return function on screen.value im going to assume
 
     const userInputObjectForm = userInput.split(/[+-/*]/);
-    console.log(userInput);
-    // console.log(userInputObjectForm);
+    console.log(userInputObjectForm)
     const filteredNumberStrings = userInputObjectForm.filter(Number);
     const filteredNumberIntegers = filteredNumberStrings.map(Number);
-    // console.log(filteredNumberIntegers);
 
     //operand logic
   const subtract = function(filteredNumberIntegers) {
@@ -35,7 +33,7 @@
   };
   
   const multiply = function(filteredNumberIntegers) {
-    let newValue = filteredNumberIntegers.reduce(function(total, num) {return total * num}, 1);
+    let newValue = filteredNumberIntegers.reduce(function(total, num) {return total * num});
     return newValue;
   };
 
@@ -48,20 +46,24 @@
     let newValue = filteredNumberIntegers.reduce(function(total, num) {return total + num}, 0);
     return newValue;
     };
-
+// something here, perhaps make it += or something like that with screen.value (assign function to var, then += with said var)
 function operate(userInput) {
   if (userInput.includes('/')) {
-    return divide(filteredNumberIntegers) // something here, perhaps make it += or something like that with screen.value (assign function to var, then += with said var)
+    result = divide(filteredNumberIntegers);
+    screen.value = result;
   } else if (userInput.includes('*')) {
-    return multiply(filteredNumberIntegers)
+    result = multiply(filteredNumberIntegers);
+    screen.value = result;
   } else if (userInput.includes("-")) {
-    return subtract(filteredNumberIntegers)
+    result = subtract(filteredNumberIntegers);
+    screen.value = result;
   } else if (userInput.includes("+")){
-    return add(filteredNumberIntegers);
+    result = add(filteredNumberIntegers);
+    screen.value = result;
    }
 };
 
-console.log(operate(userInput));
+(operate(userInput));
 })
 
 
